@@ -1,5 +1,5 @@
 {
-  "name": "johnwayne.neetgroup.net",
+  "name": "aboutjn.github.io",
   "version": "1.0.0",
   "description": "My personal portfolio SPA created with Svelte.js and Tailwind CSS. ",
   "main": "index.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neetjn/johnwayne.neetgroup.net.git"
+    "url": "git+https://github.com/neetjn/aboutjn.github.io.git"
   },
   "author": "John Nolette <john@neetgroup.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/neetjn/johnwayne.neetgroup.net/issues"
+    "url": "https://github.com/neetjn/aboutjn.github.io/issues"
   },
-  "homepage": "https://github.com/neetjn/johnwayne.neetgroup.net#readme",
+  "homepage": "https://github.com/neetjn/aboutjn.github.io#readme",
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.4",

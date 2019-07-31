@@ -15,5 +15,9 @@
     }],
     "prefer-template": "error",
     "no-useless-concat": "error"
+  },
+  "globals": {
+    "document": true,
+    "window": true
   }
 }
