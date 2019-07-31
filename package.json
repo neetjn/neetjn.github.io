@@ -4,7 +4,13 @@
   "description": "My personal portfolio SPA created with Svelte.js and Tailwind CSS. ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npx eslint src/**/**.js",
+    "pretty": "npx prettier-eslint --write src/**/**.js",
+    "bundle": "./node_modules/.bin/webpack --config webpack.config.js",
+    "build": "npm run lint && npm run pretty && npm run bundle",
+    "app:dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --output-public-path /public/ --port 3000",
+    "app:prod": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --output-public-path /public/ --host 0.0.0.0 --port 8080 --no-live-reload",
+    "start": "npm run app:prod"
   },
   "repository": {
     "type": "git",
