@@ -1,0 +1,26 @@
+/* Import fonts from Google for tailwind config:
+    https://fonts.google.com/
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800");
+/* Import Line Awesome icons with FA shim:
+    https://icons8.com/line-awesome
+*/
+@import "line-awesome/css/line-awesome";
+/* Import checkbox styles with pretty-checkbox:
+    https://github.com/lokesh-coder/pretty-checkbox
+*/
+@import "pretty-checkbox/dist/pretty-checkbox.css";
+/* Import animations with animate.css:
+    https://daneden.github.io/animate.css/
+*/
+@import "animate.css/animate";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./components/_all";
+
+* {
+  @apply font-global;
+}
