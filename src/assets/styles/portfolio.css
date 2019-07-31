@@ -2,10 +2,10 @@
     https://fonts.google.com/
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800");
-/* Import Line Awesome icons with FA shim:
-    https://icons8.com/line-awesome
+/* Import Font Awesome icons:
+    https://fontawesome.com/
 */
-@import "line-awesome/css/line-awesome";
+@import "@fortawesome/fontawesome-free/css/all.css";
 /* Import checkbox styles with pretty-checkbox:
     https://github.com/lokesh-coder/pretty-checkbox
 */
