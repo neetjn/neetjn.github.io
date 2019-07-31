@@ -3,18 +3,18 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './src/app.js'
+    main: './src/portfolio.js'
   },
   output: {
-    filename: 'metatube.bundle.js',
-    publicPath: './'
+    filename: 'portfolio.bundle.js',
+    publicPath: './public/'
   },
   watch: false,
   mode: 'development',
   target: 'web',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'metatube.bundle.css'
+      filename: 'portfolio.bundle.css'
     }),
     new OptimizeCSSAssetsPlugin({})
   ],
