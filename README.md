@@ -1,4 +1,4 @@
-# aboutjn.github.io
+# neetjn.github.io
 
 [![Build Status](https://travis-ci.org/neetjn/aboutjn.svg?branch=master)](https://travis-ci.org/neetjn/aboujn)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
