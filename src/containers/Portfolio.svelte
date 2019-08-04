@@ -1,8 +1,8 @@
 <script>
-  import Announcement from './Announcement.svelte'
-  import Carousel from './Carousel.svelte'
-  import Contact from './Contact.svelte'
-  import Footer from './Footer.svelte'
+  import Announcement from '../components/Announcement.svelte'
+  import Carousel from '../components/Carousel.svelte'
+  import Contact from '../components/Contact.svelte'
+  import Footer from '../components/Footer.svelte'
 </script>
 
 <Announcement />
