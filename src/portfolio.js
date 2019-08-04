@@ -1,3 +1,4 @@
+import './assets/styles/portfolio.css'
 
 import Portfolio from './containers/Portfolio.svelte'
 

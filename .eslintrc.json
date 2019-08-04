@@ -18,6 +18,8 @@
   },
   "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "require": true,
+    "module": true
   }
 }
