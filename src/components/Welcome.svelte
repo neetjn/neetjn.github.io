@@ -5,8 +5,8 @@
           on:click={ closeWelcome }>
     <i class="fa fa-door-open text-5xl"></i>
   </button>
-  <!-- <canvas id="scene" class="w-full opacity-0"></canvas> -->
-  <div class="flex flex-grow flex-wrap mt-1/6">
+  <canvas id="scene" class="w-full opacity-0"></canvas>
+  <div id="scene2" class="flex flex-grow flex-wrap mt-1/6 opacity-0">
     <div class="w-full md:w-1/2">
       <a href="#"
          class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline"
@@ -26,7 +26,7 @@
     <div class="w-full md:w-1/2">
       <a href="https://github.com/neetjn/"
          class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline">
-       Check Out My <i class="fa fa-code-branch"></i> Github
+       See My <i class="fa fa-code-branch"></i> Github
       </a>
     </div>
   </div>
@@ -190,24 +190,33 @@
   }
 
   onMount(() => {
-    // const canvas = document.querySelector('#scene')
-    // const draw = renderParticleText(canvas, 'Welcome', true)
+    const canvas = document.querySelector('#scene')
+    const draw = renderParticleText(canvas, 'Welcome', true)
 
-    // anime({
-    //   targets: canvas,
-    //   opacity: 1,
-    //   duration: 8000,
-    //   easing: 'easeInQuad',
-    //   complete: (e) => {
-    //     setTimeout(() => {
-    //       anime({
-    //         targets: canvas,
-    //         opacity: 0,
-    //         duration: 2500,
-    //         easing: 'easeOutQuad'
-    //       })
-    //     }, 5000)
-    //   }
-    // })
+    anime({
+      targets: canvas,check
+      opacity: 1,
+      duration: 8000,
+      easing: 'easeInQuad',
+      complete: (e) => {
+        setTimeout(() => {
+          anime({
+            targets: canvas,
+            opacity: 0,
+            duration: 2500,
+            easing: 'easeOutQuad',
+            complete: (e) => {
+              canvas.classList.toggle('hidden')
+              anime({
+                targets: document.querySelector('#scene2'),
+                opacity: 1,
+                duration: 2000,
+                easing: 'easeInQuad'
+              })
+            }
+          })
+        }, 5000)
+      }
+    })
   })
 </script>
