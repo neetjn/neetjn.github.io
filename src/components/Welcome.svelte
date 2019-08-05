@@ -1,20 +1,42 @@
-<div class="fixed w-full h-screen p-12 bg-slate-dark z-10">
-  <canvas id="scene" class="w-full opacity-0"></canvas>
-  <!--<div class="absolute b-0">
-    <div class="pretty p-icon p-smooth">
-      <input type="checkbox" />
-      <div class="state p-success">
-        <i class="icon fa fa-check"></i>
-        <label class="text-xl text-white font-extrabold">Never Show Again</label>
+<div id="welcome" class="fixed w-full h-screen p-12 bg-slate-dark z-10">
+  <button href="#"
+          alt="Exit"
+          class="fixed top-0 right-0 z-20 p-8 text-slate hover:text-white transition transition-color animated fadeIn"
+          on:click={ closeWelcome }>
+    <i class="fa fa-door-open text-5xl"></i>
+  </button>
+  <!-- <canvas id="scene" class="w-full opacity-0"></canvas> -->
+  <div class="flex flex-grow flex-wrap mt-1/6">
+    <div class="w-full md:w-1/2">
+      <a href="#"
+         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline"
+         on:click={ closeWelcome }>
+        Continue To Portfolio
+      </a>
+      <div class="pretty p-icon p-smooth mt-4 ml-1/6">
+        <input type="checkbox" />
+        <div class="state p-success">
+          <i class="icon fa fa-check"></i>
+          <label class="text-xl text-white">
+            <span class="uppercase font-extrabold">Never Show Again</span>
+          </label>
+        </div>
       </div>
     </div>
-  </div>-->
+    <div class="w-full md:w-1/2">
+      <a href="https://github.com/neetjn/"
+         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline">
+       Check Out My <i class="fa fa-code-branch"></i> Github
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
   import { onMount } from 'svelte'
   import anime from 'animejs/lib/anime.es.js'
 
+  // Color Palette: https://www.color-hex.com/color-palette/80926
   const particleColors = ['#e03e69','#20b3a2', '#657a87','#935f7b', '#b5c68a']
 
   class Particle {
@@ -153,21 +175,39 @@
     return draw
   }
 
-  onMount(() => {
-    const canvas = document.querySelector('#scene')
-
-    const draw = renderParticleText(canvas, 'Welcome To...', true)
+  const closeWelcome = (e) => {
+    const container = document.querySelector('#welcome')
 
     anime({
-      targets: canvas,
-      opacity: 1,
-      duration: 4000,
-      easing: 'easeInQuad',
+      targets: container,
+      opacity: 0,
+      duration: 2000,
+      easing: 'easeOutQuad',
       complete: () => {
-        setTimeout(() => {
-          draw('My Portfolio')
-        }, 4000)
+        container.classList.toggle('hidden')
       }
     })
+  }
+
+  onMount(() => {
+    // const canvas = document.querySelector('#scene')
+    // const draw = renderParticleText(canvas, 'Welcome', true)
+
+    // anime({
+    //   targets: canvas,
+    //   opacity: 1,
+    //   duration: 8000,
+    //   easing: 'easeInQuad',
+    //   complete: (e) => {
+    //     setTimeout(() => {
+    //       anime({
+    //         targets: canvas,
+    //         opacity: 0,
+    //         duration: 2500,
+    //         easing: 'easeOutQuad'
+    //       })
+    //     }, 5000)
+    //   }
+    // })
   })
 </script>
