@@ -13,10 +13,9 @@
          on:click={ closeWelcome }>
         Continue To Portfolio
       </a>
-      <div class="pretty p-icon p-smooth mt-4 ml-1/6">
-        <input type="checkbox" />
-        <div class="state p-success">
-          <i class="icon fa fa-check"></i>
+      <div class="pretty p-default mt-4 ml-1/6">
+        <input type="checkbox" bind:checked={ hideWelcome } />
+        <div class="state">
           <label class="text-xl text-white">
             <span class="uppercase font-extrabold">Never Show Again</span>
           </label>
@@ -25,7 +24,8 @@
     </div>
     <div class="w-full md:w-1/2">
       <a href="https://github.com/neetjn/"
-         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline">
+         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline"
+         target="_blank">
        See My <i class="fa fa-code-branch"></i> Github
       </a>
     </div>
@@ -35,6 +35,8 @@
 <script>
   import { onMount } from 'svelte'
   import anime from 'animejs/lib/anime.es.js'
+
+  let hideWelcome = false
 
   // Color Palette: https://www.color-hex.com/color-palette/80926
   const particleColors = ['#e03e69','#20b3a2', '#657a87','#935f7b', '#b5c68a']
@@ -63,8 +65,8 @@
     }
 
     render() {
-      this.accX = (this.dest.x - this.x) / 1000
-      this.accY = (this.dest.y - this.y) / 1000
+      this.accX = (this.dest.x - this.x) / 500
+      this.accY = (this.dest.y - this.y) / 500
 
       this.vx += this.accX
       this.vy += this.accY
@@ -178,6 +180,9 @@
   const closeWelcome = (e) => {
     const container = document.querySelector('#welcome')
 
+    if (hideWelcome)
+      window.localStorage.setItem('hideWelcome', true)
+
     anime({
       targets: container,
       opacity: 0,
@@ -194,7 +199,7 @@
     const draw = renderParticleText(canvas, 'Welcome', true)
 
     anime({
-      targets: canvas,check
+      targets: canvas,
       opacity: 1,
       duration: 8000,
       easing: 'easeInQuad',
@@ -203,7 +208,7 @@
           anime({
             targets: canvas,
             opacity: 0,
-            duration: 2500,
+            duration: 2000,
             easing: 'easeOutQuad',
             complete: (e) => {
               canvas.classList.toggle('hidden')
@@ -215,7 +220,7 @@
               })
             }
           })
-        }, 5000)
+        }, 4000)
       }
     })
   })
