@@ -20,7 +20,7 @@
 {/if}
 
 <Announcement />
-<div class="flex flex-col h-full">
+<div id="portfolioBody" class="flex flex-col h-full">
   <Carousel />
   <Contact />
   <Footer />

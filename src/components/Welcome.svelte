@@ -1,30 +1,35 @@
-<div id="welcome" class="fixed w-full h-screen p-12 bg-slate-dark z-10">
-  <button href="#"
+<div id="welcome" class="fixed w-full h-screen p-12 bg-slate-dark z-20">
+  <div>
+    <button href="#"
           alt="Exit"
-          class="fixed top-0 right-0 z-20 p-8 text-slate hover:text-white transition transition-color animated fadeIn"
+          class="fixed top-0 right-0 z-20 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
           on:click={ closeWelcome }>
-    <i class="fa fa-door-open text-5xl"></i>
-  </button>
+      <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span> <br />
+      <span class="uppercase font-semibold text-xs md:text-md">( Esc )</span>
+    </button>
+  </div>
   <canvas id="scene" class="w-full opacity-0"></canvas>
   <div id="scene2" class="flex flex-grow flex-wrap mt-1/6 opacity-0">
-    <div class="w-full md:w-1/2">
-      <a href="#"
-         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline"
-         on:click={ closeWelcome }>
-        Continue To Portfolio
-      </a>
-      <div class="pretty p-default mt-4 ml-1/6">
-        <input type="checkbox" bind:checked={ hideWelcome } />
-        <div class="state">
-          <label class="text-xl text-white">
-            <span class="uppercase font-extrabold">Never Show Again</span>
-          </label>
+    <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
+      <div class="table m-0 md:m-auto">
+        <a href="#"
+          class="block text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+          on:click={ closeWelcome }>
+          Continue To Portfolio
+        </a>
+        <div class="pretty p-default mt-4">
+          <input type="checkbox" bind:checked={ hideWelcome } />
+          <div class="state">
+            <label class="text-md md:text-xl text-white">
+              <span class="uppercase font-extrabold">Never Show Again</span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
     <div class="w-full md:w-1/2">
       <a href="https://github.com/neetjn/"
-         class="block text-white text-5xl text-center font-extrabold uppercase transition transition-all hover:underline"
+         class="block text-white hover:text-gray-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
          target="_blank">
        See My <i class="fa fa-code-branch"></i> Github
       </a>
@@ -179,6 +184,7 @@
 
   const closeWelcome = (e) => {
     const container = document.querySelector('#welcome')
+    const portfolioBody = document.querySelector('#portfolioBody')
 
     if (hideWelcome)
       window.localStorage.setItem('hideWelcome', true)
@@ -188,39 +194,65 @@
       opacity: 0,
       duration: 2000,
       easing: 'easeOutQuad',
-      complete: () => {
+      begin: (e) => {
         container.classList.toggle('hidden')
+        anime({
+          targets: portfolioBody,
+          scale: 1,
+          duration: 150,
+          easing: 'easeInQuad',
+          complete: (e) => {
+            window.removeEventListener('keydown', closeWelcomeKey)
+          }
+        })
       }
     })
+  }
+
+  const closeWelcomeKey = (e) => {
+    if (e.key == 'Escape')
+      closeWelcome()
   }
 
   onMount(() => {
     const canvas = document.querySelector('#scene')
     const draw = renderParticleText(canvas, 'Welcome', true)
 
+    const portfolioBody = document.querySelector('#portfolioBody')
+
+    window.addEventListener('keydown', closeWelcomeKey)
+
     anime({
-      targets: canvas,
-      opacity: 1,
-      duration: 8000,
-      easing: 'easeInQuad',
+      targets: portfolioBody,
+      scale: 0.85,
+      duration: 150,
+      easing: 'easeOutQuad',
       complete: (e) => {
-        setTimeout(() => {
-          anime({
-            targets: canvas,
-            opacity: 0,
-            duration: 2000,
-            easing: 'easeOutQuad',
-            complete: (e) => {
-              canvas.classList.toggle('hidden')
+        anime({
+          targets: canvas,
+          opacity: 1,
+          duration: 8000,
+          easing: 'easeInQuad',
+          complete: (e) => {
+            setTimeout(() => {
               anime({
-                targets: document.querySelector('#scene2'),
-                opacity: 1,
+                targets: canvas,
+                opacity: 0,
                 duration: 2000,
-                easing: 'easeInQuad'
+                easing: 'easeOutQuad',
+                complete: (e) => {
+                  canvas.classList.toggle('hidden')
+                  anime({
+                    targets: document.querySelector('#scene2'),
+                    opacity: 1,
+                    duration: 2000,
+                    easing: 'easeInQuad'
+                  })
+                }
               })
-            }
-          })
-        }, 4000)
+            }, 4000)
+          }
+        })
       }
     })
   })
