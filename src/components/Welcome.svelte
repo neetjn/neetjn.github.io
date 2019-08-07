@@ -1,9 +1,8 @@
 <div id="welcome" class="fixed w-full h-screen p-12 bg-slate-dark z-20">
   <div>
-    <button href="#"
-          alt="Exit"
-          class="fixed top-0 right-0 z-20 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
-          on:click={ closeWelcome }>
+    <button alt="Exit"
+            class="fixed top-0 right-0 z-20 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
+            on:click={ closeWelcome }>
       <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span> <br />
       <span class="uppercase font-semibold text-xs md:text-md">( Esc )</span>
     </button>
@@ -13,8 +12,8 @@
     <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
       <div class="table m-0 md:m-auto">
         <a href="#"
-          class="block text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
-          on:click={ closeWelcome }>
+           class="block text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+           on:click={ closeWelcome }>
           Continue To Portfolio
         </a>
         <div class="pretty p-default mt-4">
@@ -33,6 +32,26 @@
          target="_blank">
        See My <i class="fa fa-code-branch"></i> Github
       </a>
+      <ul class="text-white text-2xl">
+        <li>
+          <a href="https://github.com/neetjn/"
+             class="inline-block">
+             <i class="fa fa-github"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/john-nolette-69ba72132/"
+             class="inline-block">
+             <i class="fa fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/neet_jn/"
+             class="inline-block">
+             <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
@@ -183,11 +202,11 @@
     return draw
   }
 
-  const closeWelcome = (e) => {
+  const closeWelcome = (e, escaped = false) => {
     const container = document.querySelector('#welcome')
     const portfolioBody = document.querySelector('#portfolioBody')
 
-    if (hideWelcome)
+    if (hideWelcome && !escaped)
       window.localStorage.setItem('hideWelcome', true)
 
     anime({
@@ -212,7 +231,7 @@
 
   const closeWelcomeKey = (e) => {
     if (e.key == 'Escape')
-      closeWelcome()
+      closeWelcome(null, true)
   }
 
   onMount(() => {
@@ -242,6 +261,7 @@
                 easing: 'easeOutQuad',
                 complete: (e) => {
                   canvas.classList.toggle('hidden')
+                  hideWelcome = true
                   anime({
                     targets: document.querySelector('#scene2'),
                     opacity: 1,

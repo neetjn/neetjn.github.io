@@ -55,13 +55,13 @@ module.exports = {
           },
         ]
       },
-      // {
-      //   test: /\.(woff2?|ttf|otf|eot|svg)$/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[path][name].[ext]'
-      //   }
-      // },
+      /*{
+        test: /\.(woff2?|ttf|otf|eot|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      },*/
       {
         test: /\.css$/,
         use: [
