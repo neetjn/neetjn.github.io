@@ -216,10 +216,9 @@
   }
 
   onMount(() => {
+    const portfolioBody = document.querySelector('#portfolioBody')
     const canvas = document.querySelector('#scene')
     const draw = renderParticleText(canvas, 'Welcome', true)
-
-    const portfolioBody = document.querySelector('#portfolioBody')
 
     window.addEventListener('keydown', closeWelcomeKey)
 

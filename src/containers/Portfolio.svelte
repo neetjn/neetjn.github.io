@@ -7,11 +7,11 @@
   import Contact from '../components/Contact.svelte'
   import Footer from '../components/Footer.svelte'
 
-  let showWelcome = true
+  let showWelcome = false
 
   onMount(() => {
-    if (!!window.localStorage.getItem('hideWelcome'))
-      showWelcome = false
+    if (!!!window.localStorage.getItem('hideWelcome'))
+      showWelcome = true
   })
 </script>
 
