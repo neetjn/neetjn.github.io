@@ -7,6 +7,7 @@ module.exports = {
   },
   output: {
     filename: 'portfolio.bundle.js',
+    path: __dirname + '/public',
     publicPath: './public/'
   },
   watch: false,
