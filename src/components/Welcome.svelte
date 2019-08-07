@@ -56,6 +56,7 @@
         x : x,
         y: y
       }
+      // TODO: base radius off screen size, smaller screens have 0.5 instead of 1
       this.radius = radius
       this.r =  Math.random() * 5 + 2
       this.vx = (Math.random() - 0.5) * 20
