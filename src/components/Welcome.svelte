@@ -193,14 +193,14 @@
     anime({
       targets: container,
       opacity: 0,
-      duration: 2000,
+      duration: 750,
       easing: 'easeOutQuad',
-      begin: (e) => {
+      complete: (e) => {
         container.classList.toggle('hidden')
         anime({
           targets: portfolioBody,
           scale: 1,
-          duration: 150,
+          duration: 500,
           easing: 'easeInQuad',
           complete: (e) => {
             window.removeEventListener('keydown', closeWelcomeKey)
