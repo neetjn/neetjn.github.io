@@ -1,18 +1,26 @@
-<div id="welcome" class="fixed w-full h-screen p-12 bg-slate-dark z-20">
+<div id="welcome"
+     class="fixed w-full h-screen p-12 bg-slate-dark z-20">
+  <img alt="Background"
+       class="absolute top-0 right-0 w-full h-screen"
+       style="background: url({Background}) no-repeat;
+              background-size: cover;
+              background-position: 100% 25%;
+              opacity: 0.25;" />
   <div>
     <button alt="Exit"
-            class="fixed top-0 right-0 z-20 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
+            class="fixed top-0 right-0 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
             on:click={ closeWelcome }>
-      <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span> <br />
+      <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span>
+      <br />
       <span class="uppercase font-semibold text-xs md:text-md">( Esc )</span>
     </button>
   </div>
-  <canvas id="scene" class="w-full opacity-0"></canvas>
+  <canvas id="scene" class="relative z-30 w-full opacity-0"></canvas>
   <div id="scene2" class="flex flex-grow flex-wrap mt-1/6 opacity-0">
     <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
       <div class="table m-0 md:m-auto">
         <a href="#"
-           class="block text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+           class="block relative z-30 text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
            on:click={ closeWelcome }>
           Continue To Portfolio
         </a>
@@ -28,27 +36,41 @@
     </div>
     <div class="w-full md:w-1/2">
       <a href="https://github.com/neetjn/"
-         class="block text-white hover:text-gray-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+         class="block relative z-30 text-white hover:text-gray-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
          target="_blank">
-       See My <i class="fa fa-code-branch"></i> Github
+        See My <i class="fa fa-code-branch"></i> Github
       </a>
-      <ul class="text-white text-2xl">
-        <li>
+    </div>
+    <div class="w-full hidden md:flex absolute bottom-0 mb-12">
+      <ul id="social" class="unstyled table m-auto text-white text-6xl">
+        <li class="inline-block pr-12">
           <a href="https://github.com/neetjn/"
-             class="inline-block">
-             <i class="fa fa-github"></i>
+             class="hover:text-purple-500 transition transition-color">
+            <i class="fab fa-github"></i>
           </a>
         </li>
-        <li>
+        <li class="inline-block pr-12">
+          <a href="https://dev.to/neetjn/"
+             class="hover:text-slate transition transition-color">
+            <i class="fab fa-dev"></i>
+          </a>
+        </li>
+        <li class="inline-block pr-12">
           <a href="https://www.linkedin.com/in/john-nolette-69ba72132/"
-             class="inline-block">
-             <i class="fa fa-linkedin-in"></i>
+             class="hover:text-blue-500 transition transition-color">
+            <i class="fab fa-linkedin-in"></i>
           </a>
         </li>
-        <li>
+        <li class="inline-block pr-12">
           <a href="https://twitter.com/neet_jn/"
-             class="inline-block">
-             <i class="fa fa-twitter"></i>
+             class="hover:text-blue-300 transition transition-color">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="inline-block">
+          <a href="https://www.youtube.com/channel/UCkNCXvfPSGy9K6et7ZTXI6g/"
+             class="hover:text-red-500 transition transition-color">
+            <i class="fab fa-youtube"></i>
           </a>
         </li>
       </ul>
@@ -59,6 +81,8 @@
 <script>
   import { onMount } from 'svelte'
   import anime from 'animejs/lib/anime.es.js'
+
+  import Background from '../assets/images/welcome-bg-2.jpg'
 
   let hideWelcome = false
 
@@ -90,8 +114,8 @@
     }
 
     render() {
-      this.accX = (this.dest.x - this.x) / 500
-      this.accY = (this.dest.y - this.y) / 500
+      this.accX = (this.dest.x - this.x) / 1000
+      this.accY = (this.dest.y - this.y) / 1000
 
       this.vx += this.accX
       this.vy += this.accY
@@ -236,6 +260,7 @@
 
   onMount(() => {
     const portfolioBody = document.querySelector('#portfolioBody')
+    const socialIcons = document.querySelectorAll('ul#social li')
     const canvas = document.querySelector('#scene')
     const draw = renderParticleText(canvas, 'Welcome', true)
 
@@ -266,7 +291,18 @@
                     targets: document.querySelector('#scene2'),
                     opacity: 1,
                     duration: 2000,
-                    easing: 'easeInQuad'
+                    easing: 'easeInQuad',
+                    complete: (e) => {
+                      anime({
+                        targets: socialIcons,
+                        translateY: [0, -40, 0],
+                        duration: 1250,
+                        delay: anime.stagger(100),
+                        startDelay: 1000,
+                        endDelay: 10000,
+                        loop: true
+                      })
+                    }
                   })
                 }
               })
