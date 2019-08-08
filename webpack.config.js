@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     filename: 'portfolio.bundle.js',
-    path: __dirname + '/public',
+    path: `${__dirname}/public`,
     publicPath: './public/'
   },
   watch: false,
@@ -33,7 +33,6 @@ module.exports = {
       },
       {
         test: /\.svelte$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'svelte-loader',
