@@ -34,14 +34,10 @@
       activeRoute = route.route
     }
   }
-
-  let url = ''
-  let basepath = '/#/'
-  let hash = true
 </script>
 
-<div class="w-full h-screen pt-24 bg-purple-500 relative">
-  <Router url="{url}" basepath="{basepath}" hash="{hash}">
+<div class="w-full h-screen relative">
+  <Router basepath="#" hash="{true}">
     <Route path="profile" component="{Profile}" />
     <Route path="projects" component="{Projects}" />
     <Route path="resume" component="{Resume}" />
@@ -49,11 +45,11 @@
       <Profile />
     </Route>
     <div class="absolute bottom-0 pb-12 w-full">
-      <ul class="table m-auto unstyled text-5xl">
+      <ul class="table m-auto unstyled text-5xl text-white">
         {#each Routes as route, i}
         <li class="inline-block pr-6">
           <Link to="{route.route}" on:click={ e => toggleRoute(route) }>
-            <i class="fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
+            <i class="animated fadeIn fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
           </Link>
         </li>
         {/each}
