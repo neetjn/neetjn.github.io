@@ -1,33 +1,61 @@
 <script>
-  import { Router, Link, Route } from 'svelte-routing'
+  import { Router, Route, link } from 'svelte-routing'
+
+  // TODO: add client sided routing support when issue-67 resolved
+  // https://github.com/EmilTholin/svelte-routing/issues/67
 
   import Profile from '../views/Profile.svelte'
   import Projects from '../views/Projects.svelte'
   import Resume from '../views/Resume.svelte'
 
-  let url = ""
+  const Routes = [
+    {
+      route: 'profile',
+      component: Profile,
+      active: false
+    },
+    {
+      route: 'projects',
+      component: Projects,
+      active: false
+    },
+    {
+      route: 'resume',
+      component: Resume,
+      active: false
+    },
+  ]
+
+  // shim for forced view update
+  let activeRoute = Routes[0].route
+
+  const toggleRoute = (route) => {
+    if (!route.active) {
+      Routes.filter(r => r.active).forEach(r => r.active = false)
+      route.active = true
+      // shim for forced view update
+      activeRoute = route.route
+    }
+  }
 </script>
 
-<div class="w-full h-screen p-24 bg-purple-500 relative">
-  <h1 class="text-6xl">Carousel</h1>
-  <Router url="{url}">
+<div class="w-full h-screen pt-24 bg-purple-500 relative">
+  <Router>
     <Route path="profile" component="{Profile}" />
     <Route path="projects" component="{Projects}" />
     <Route path="resume" component="{Resume}" />
-    <Route path="/">
+    <Route path="">
       <Profile />
     </Route>
-    <div class="absolute bottom-0 p-12">
-      <ul class="unstyled inline">
+    <div class="absolute bottom-0 pb-12 w-full">
+      <ul class="table m-auto unstyled text-5xl">
+        {#each Routes as route, i}
         <li class="inline-block pr-6">
-          <Link to="/profile">Home</Link>
+          <a href="{ route.route }" on:click={ e => toggleRoute(route) } use:link>
+            <i class="fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
+          </a>
         </li>
-        <li class="inline-block pr-6">
-          <Link to="projects">Projects</Link>
-        </li>
-        <li class="inline-block">
-          <Link to="resume">Resume</Link>
-        </li>
+        {/each}
       </ul>
     </div>
   </Router>
