@@ -44,10 +44,10 @@
     <Route path="">
       <Profile />
     </Route>
-    <div class="absolute bottom-0 pb-12 w-full">
+    <div class="relative md:absolute bottom-0 md:pb-6 w-full">
       <ul class="table m-auto unstyled text-5xl text-white">
         {#each Routes as route, i}
-        <li class="inline-block pr-6">
+        <li class="inline-block pr-6" style="{ activeRoute == route.route ? 'opacity: 0.40' : '' }">
           <Link to="{route.route}" on:click={ e => toggleRoute(route) }>
             <i class="animated fadeIn fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
           </Link>

@@ -20,7 +20,8 @@
     <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
       <div class="table m-0 md:m-auto">
         <a href="#"
-           class="block relative z-30 text-white hover:text-gray-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+           class="block relative z-30 text-white hover:text-red-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline
+                  p-4 border-red-500 border-8"
            on:click={ closeWelcome }>
           Continue To Portfolio
         </a>
@@ -36,7 +37,7 @@
     </div>
     <div class="w-full md:w-1/2">
       <a href="https://github.com/neetjn/"
-         class="block relative z-30 text-white hover:text-gray-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+         class="block relative z-30 text-white hover:text-teal-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
          target="_blank">
         See My <i class="fa fa-code-branch"></i> Github
       </a>
