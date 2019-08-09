@@ -1,8 +1,5 @@
 <script>
-  import { Router, Route, link } from 'svelte-routing'
-
-  // TODO: add client sided routing support when issue-67 resolved
-  // https://github.com/EmilTholin/svelte-routing/issues/67
+  import { Router, Route, Link, link } from '../../lib/svelte-routing'
 
   import Profile from '../views/Profile.svelte'
   import Projects from '../views/Projects.svelte'
@@ -37,10 +34,14 @@
       activeRoute = route.route
     }
   }
+
+  let url = ''
+  let basepath = '/#/'
+  let hash = true
 </script>
 
 <div class="w-full h-screen pt-24 bg-purple-500 relative">
-  <Router>
+  <Router url="{url}" basepath="{basepath}" hash="{hash}">
     <Route path="profile" component="{Profile}" />
     <Route path="projects" component="{Projects}" />
     <Route path="resume" component="{Resume}" />
@@ -51,9 +52,9 @@
       <ul class="table m-auto unstyled text-5xl">
         {#each Routes as route, i}
         <li class="inline-block pr-6">
-          <a href="{ route.route }" on:click={ e => toggleRoute(route) } use:link>
+          <Link to="{route.route}" on:click={ e => toggleRoute(route) }>
             <i class="fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
-          </a>
+          </Link>
         </li>
         {/each}
       </ul>

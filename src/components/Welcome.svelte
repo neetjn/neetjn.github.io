@@ -1,11 +1,11 @@
 <div id="welcome"
      class="fixed w-full h-screen p-12 bg-slate-dark z-20">
-  <img alt=""
+  <!-- <img alt=""
        class="absolute top-0 right-0 w-full h-screen"
        style="background: url({Background}) no-repeat;
               background-size: cover;
               background-position: 100% 25%;
-              opacity: 0.25;" />
+              opacity: 0.25;" /> -->
   <div>
     <button alt="Exit"
             class="fixed top-0 right-0 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"

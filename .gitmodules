@@ -1,0 +1,4 @@
+[submodule "lib/svelte-routing"]
+	path = lib/svelte-routing
+	url = git@github.com:neetjn/svelte-routing.git
+	branch = issue-67-neetjn
