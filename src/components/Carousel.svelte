@@ -1,15 +1,21 @@
 <script>
-  import { Router, Route, Link, link } from '../../lib/svelte-routing'
+  import { Router, Route, Link } from '../../lib/svelte-routing'
 
-  import Profile from '../views/Profile.svelte'
+  import Intro from '../views/Intro.svelte'
+  import Skills from '../views/Skills.svelte'
   import Projects from '../views/Projects.svelte'
   import Resume from '../views/Resume.svelte'
 
   const Routes = [
     {
-      route: 'profile',
-      component: Profile,
+      route: 'intro',
+      component: Intro,
       active: false
+    },
+    {
+      route: 'skills',
+      component: Skills,
+      active: false,
     },
     {
       route: 'projects',
@@ -38,18 +44,19 @@
 
 <div class="w-full h-screen relative">
   <Router basepath="#" hash="{true}">
-    <Route path="profile" component="{Profile}" />
+    <Route path="intro" component="{Intro}" />
+    <Route path="skills" component="{Skills}" />
     <Route path="projects" component="{Projects}" />
     <Route path="resume" component="{Resume}" />
     <Route path="">
-      <Profile />
+      <Intro />
     </Route>
-    <div class="relative md:absolute bottom-0 md:pb-6 w-full">
-      <ul class="table m-auto unstyled text-5xl text-white">
+    <div class="absolute top-1/3 ml-8">
+      <ul class="table unstyled text-3xl md:text-5xl text-white">
         {#each Routes as route, i}
-        <li class="inline-block pr-6" style="{ activeRoute == route.route ? 'opacity: 0.40' : '' }">
+        <li class="pb-2 md:pb-6" style="{ activeRoute == route.route ? 'opacity: 0.40' : 'opacity: 0.50' };">
           <Link to="{route.route}" on:click={ e => toggleRoute(route) }>
-            <i class="animated fadeIn fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
+            <i class="shadow-md animated fadeIn fas { activeRoute == route.route ? 'fa-bullseye' : 'fa-circle' }"></i>
           </Link>
         </li>
         {/each}
