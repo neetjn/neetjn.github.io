@@ -30,6 +30,7 @@
   ]
 
   // shim for forced view update
+  // TODO: properly set default route
   let activeRoute = Routes[0].route
 
   const toggleRoute = (route) => {

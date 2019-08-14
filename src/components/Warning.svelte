@@ -4,7 +4,7 @@
   let showWarning = false
 
   const sizeCheck = (e) => {
-    showWarning = window.innerWidth < 400
+    showWarning = window.innerWidth < 450
   }
 
   onMount(() => {

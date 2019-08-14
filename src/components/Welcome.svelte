@@ -1,84 +1,3 @@
-<div id="welcome"
-     class="fixed w-full h-screen p-12 bg-slate-dark z-20">
-  <img alt=""
-       class="absolute top-0 right-0 w-full h-screen"
-       style="background: url({Background}) no-repeat;
-              background-size: cover;
-              background-position: 100% 25%;
-              opacity: 0.25;" />
-  <div>
-    <button alt="Exit"
-            class="fixed top-0 right-0 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
-            on:click={ closeWelcome }>
-      <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span>
-      <br />
-      <span class="uppercase font-semibold text-xs md:text-md">( Esc )</span>
-    </button>
-  </div>
-  <canvas id="scene" class="relative z-30 w-full opacity-0"></canvas>
-  <div id="scene2" class="flex flex-grow flex-wrap mt-1/6 opacity-0">
-    <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
-      <div class="table m-0 md:m-auto">
-        <a href="#"
-           class="block relative z-30 text-white hover:text-red-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline
-                  p-4 border-red-500 border-8"
-           on:click={ closeWelcome }>
-          Continue To Portfolio
-        </a>
-        <div class="pretty p-default mt-4">
-          <input type="checkbox" bind:checked={ hideWelcome } />
-          <div class="state">
-            <label class="text-md md:text-xl text-white">
-              <span class="uppercase font-extrabold">Never Show Again</span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="w-full md:w-1/2">
-      <a href="https://github.com/neetjn/"
-         class="block relative z-30 text-white hover:text-teal-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
-         target="_blank">
-        See My <i class="fa fa-code-branch"></i> Github
-      </a>
-    </div>
-    <div class="w-full hidden md:flex absolute bottom-0 mb-12">
-      <ul id="social" class="unstyled table m-auto text-white text-6xl">
-        <li class="inline-block pr-12">
-          <a href="https://github.com/neetjn/"
-             class="hover:text-purple-500 transition transition-color">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-        <li class="inline-block pr-12">
-          <a href="https://dev.to/neetjn/"
-             class="hover:text-slate transition transition-color">
-            <i class="fab fa-dev"></i>
-          </a>
-        </li>
-        <li class="inline-block pr-12">
-          <a href="https://www.linkedin.com/in/john-nolette-69ba72132/"
-             class="hover:text-blue-500 transition transition-color">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </li>
-        <li class="inline-block pr-12">
-          <a href="https://twitter.com/neet_jn/"
-             class="hover:text-blue-300 transition transition-color">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="inline-block">
-          <a href="https://www.youtube.com/channel/UCkNCXvfPSGy9K6et7ZTXI6g/"
-             class="hover:text-red-500 transition transition-color">
-            <i class="fab fa-youtube"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
 <script>
   import { onMount } from 'svelte'
   import anime from 'animejs/lib/anime.es.js'
@@ -88,7 +7,7 @@
   let hideWelcome = false
 
   // Color Palette: https://www.color-hex.com/color-palette/80926
-  const particleColors = ['#e03e69','#20b3a2', '#657a87','#935f7b', '#b5c68a']
+  const Colors = ['#e03e69','#20b3a2', '#657a87','#935f7b', '#b5c68a']
 
   class Particle {
     constructor(ctx, mouse, x, y, radius, ww, wh) {
@@ -96,10 +15,7 @@
       this.mouse = mouse
       this.x =  Math.random() * ww
       this.y =  Math.random() * wh
-      this.dest = {
-        x : x,
-        y: y
-      }
+      this.dest = { x, y }
       // TODO: base radius off screen size, smaller screens have 0.5 instead of 1
       this.radius = radius
       this.r =  Math.random() * 5 + 2
@@ -150,7 +66,7 @@
         particles = [],
         amount = 0,
         mouse = {x: 0, y: 0},
-        radius = 1;
+        radius = 1 / (window.innerWidth < 600 ? 1 : 4);
 
     let ww = canvas.width = window.innerWidth
     let wh = canvas.height = window.innerHeight
@@ -260,57 +176,135 @@
   }
 
   onMount(() => {
-    const portfolioBody = document.querySelector('#portfolioBody')
-    const socialIcons = document.querySelectorAll('ul#social li')
     const canvas = document.querySelector('#scene')
     const draw = renderParticleText(canvas, 'Welcome', true)
 
     window.addEventListener('keydown', closeWelcomeKey)
 
     anime({
-      targets: portfolioBody,
+      targets: document.querySelector('#portfolioBody'),
       scale: 0.85,
       duration: 150,
-      easing: 'easeOutQuad',
-      complete: (e) => {
-        anime({
+      easing: 'easeOutQuad'
+    }).finished
+      .then(e => {
+        return anime({
           targets: canvas,
           opacity: 1,
           duration: 8000,
-          easing: 'easeInQuad',
-          complete: (e) => {
-            setTimeout(() => {
-              anime({
-                targets: canvas,
-                opacity: 0,
-                duration: 2000,
-                easing: 'easeOutQuad',
-                complete: (e) => {
-                  canvas.classList.toggle('hidden')
-                  hideWelcome = true
-                  anime({
-                    targets: document.querySelector('#scene2'),
-                    opacity: 1,
-                    duration: 2000,
-                    easing: 'easeInQuad',
-                    complete: (e) => {
-                      anime({
-                        targets: socialIcons,
-                        translateY: [0, -40, 0],
-                        duration: 1250,
-                        delay: anime.stagger(100),
-                        startDelay: 1000,
-                        endDelay: 10000,
-                        loop: true
-                      })
-                    }
-                  })
-                }
-              })
-            }, 4000)
-          }
+          easing: 'easeInQuad'
+        }).finished
+      })
+      .then(e => {
+        return anime({
+          targets: canvas,
+          opacity: 0,
+          delay: 2000,
+          duration: 2000,
+          easing: 'easeOutQuad'
+        }).finished
+      })
+      .then(e => {
+        canvas.classList.toggle('hidden')
+        hideWelcome = true
+        return anime({
+          targets: document.querySelector('#scene2'),
+          opacity: 1,
+          duration: 2000,
+          easing: 'easeInQuad'
+        }).finished
+      })
+      .then(e => {
+        anime({
+          targets: document.querySelectorAll('ul#social li'),
+          translateY: [0, -40, 0],
+          duration: 1250,
+          delay: anime.stagger(100),
+          startDelay: 1000,
+          endDelay: 10000,
+          loop: true
         })
-      }
-    })
+      })
   })
 </script>
+
+<div id="welcome"
+     class="fixed w-full h-screen p-12 bg-slate-dark z-20">
+  <img alt=""
+       class="absolute top-0 right-0 w-full h-screen"
+       style="background: url({Background}) no-repeat;
+              background-size: cover;
+              background-position: 100% 25%;
+              opacity: 0.25;" />
+  <div>
+    <button alt="Exit"
+            class="fixed top-0 right-0 p-8 text-white hover:text-gray-500 transition transition-color animated fadeIn"
+            on:click={ closeWelcome }>
+      <span class="uppercase font-extrabold text-3xl md:text-5xl">x</span>
+      <br />
+      <span class="uppercase font-semibold text-xs md:text-md">( Esc )</span>
+    </button>
+  </div>
+  <canvas id="scene" class="relative z-30 w-full opacity-0"></canvas>
+  <div id="scene2" class="flex flex-grow flex-wrap mt-1/6 opacity-0">
+    <div class="w-full md:w-1/2 mt-1/3 sm:mt-0 mb-10 md:mb-0">
+      <div class="table m-0 md:m-auto">
+        <a href="#"
+           class="block relative z-30 text-white hover:text-red-500 text-2xl md:text-3xl xl:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline
+                  p-4 border-red-500 border-8"
+           on:click={ closeWelcome }>
+          Continue To Portfolio
+        </a>
+        <div class="pretty p-default mt-4">
+          <input type="checkbox" bind:checked={ hideWelcome } />
+          <div class="state">
+            <label class="text-md md:text-xl text-white">
+              <span class="uppercase font-extrabold">Never Show Again</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full md:w-1/2">
+      <a href="https://github.com/neetjn/"
+         class="block relative z-30 text-white hover:text-teal-500 text-2xl md:text-5xl text-left md:text-center font-extrabold uppercase transition transition-all hover:underline"
+         target="_blank">
+        See My <i class="fa fa-code-branch"></i> Github
+      </a>
+    </div>
+    <div class="w-full hidden md:flex absolute bottom-0 mb-12">
+      <ul id="social" class="unstyled table m-auto text-white text-6xl">
+        <li class="inline-block pr-12">
+          <a href="https://github.com/neetjn/"
+             class="hover:text-purple-500 transition transition-color">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="inline-block pr-12">
+          <a href="https://dev.to/neetjn/"
+             class="hover:text-slate transition transition-color">
+            <i class="fab fa-dev"></i>
+          </a>
+        </li>
+        <li class="inline-block pr-12">
+          <a href="https://www.linkedin.com/in/john-nolette-69ba72132/"
+             class="hover:text-blue-500 transition transition-color">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li class="inline-block pr-12">
+          <a href="https://twitter.com/neet_jn/"
+             class="hover:text-blue-300 transition transition-color">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="inline-block">
+          <a href="https://www.youtube.com/channel/UCkNCXvfPSGy9K6et7ZTXI6g/"
+             class="hover:text-red-500 transition transition-color">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

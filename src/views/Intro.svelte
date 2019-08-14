@@ -40,12 +40,11 @@
               opacity: 0.75;" />
   <canvas id="twinkle"
           class="absolute top-0 right-0 w-full h-screen z-10"></canvas>
-  <!-- TODO: align profile image/content -->
   <div class="relative w-full h-screen table z-20">
     <div class="table-cell align-middle">
       <img alt=""
             src="{Picture}"
-            class="md:block m-auto mb-4 w-1/4 h-auto rounded-full p-1 bg-red-500 shadow-md" />
+            class="md:block m-auto mb-4 w-1/6 md:w-1/4 h-auto rounded-full p-1 bg-red-500 shadow-md" />
       <h1 class="text-3xl md:text-5xl font-extrabold">
         I'm <span class="text-red-500">John</span><span id="period">.</span>
       </h1>
