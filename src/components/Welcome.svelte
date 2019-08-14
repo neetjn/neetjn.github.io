@@ -26,8 +26,7 @@
 
       this.friction = Math.random() * 0.05 + 0.94
 
-      // # TODO: update for dynamic list of colors
-      this.color = particleColors[Math.floor(Math.random() * 6)]
+      this.color = Colors[Math.floor(Math.random() * 6)]
     }
 
     render() {
